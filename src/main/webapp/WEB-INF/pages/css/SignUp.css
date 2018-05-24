@@ -1,0 +1,229 @@
+html,
+body {
+    font-size: 100%;
+    background: #FFB675;
+    transition: all 0s;
+}
+
+.user {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px 20px 20px 20px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ff2121;
+    border-radius: 4px;
+}
+
+.user form{
+    margin: 0;
+}
+
+.user div.hr {
+    display: flex;
+    width: 100%;
+    margin: 10px 0;
+    color: #fff4f3;
+}
+
+.user div.hr div {
+    font-family: "helvetica", serif;
+    font-size: 1.5em;
+}
+.user div.hr div:first-child,
+.user div.hr div:last-child {
+    flex: 1;
+    position: relative;
+}
+
+.user div.hr div:first-child:before,
+.user div.hr div:last-child:before {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    right: 0px;
+    height: 2px;
+    background-color: #fff4f3;
+}
+
+.user div.hr div:first-child {
+    margin-right: 20px;
+}
+
+.user div.hr div:last-child {
+    margin-left: 20px;
+}
+
+.user .txt p{
+    width: 19%;
+    margin: 8px 0px;
+    color: #fff4f3;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.user .txt p.value{
+    width: 77.2%;
+    border-radius: 3px;
+    border: 2px solid #fff4f3;
+    padding: 5px;
+    text-align: center;
+    height: 18px;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.user .txt {
+    position: relative;
+}
+.user .txt p,
+.user .txt input{
+    display: inline-block;
+}
+
+.user .txt input[type="text"],
+.user .txt input[type="password"] {
+    color: #555;
+    padding: 12px;
+    /*border: 1px solid #888;*/
+    border: 2px solid transparent;
+    border-radius: 4px;
+    outline: none;
+    background-color: #fff4f3;
+}
+
+.user .txt input[type="text"]:hover,
+.user .txt input[type="password"]:hover,
+.user .txt input[type="text"]:focus,
+.user .txt input[type="password"]:focus {
+    background-color: #FFF;
+}
+
+.user .txt input[type="text"]:focus,
+.user .txt input[type="password"]:focus {
+    border-color: #B10000;
+}
+
+.user .txt label {
+    cursor: text;
+}
+
+.user .txt label:before {
+    display: inline-block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    font-family: 'entypo', sans-serif;
+    font-size: 1.1em;
+    color: #B10000;
+    line-height: 58px;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+}
+
+.user input {
+    width: 80%;
+    margin: 8px 0px;
+    padding: 12px;
+}
+
+.user .buttons.edit {
+    cursor: pointer;
+    color: #FFF;
+    font-size: 1.2em;
+    border: 0 none;
+    border-radius: 4px;
+    outline: none;
+    background-color: #E30000;
+    box-shadow: 0 2px #a30000, inset 0 0 #a30000;
+}
+
+.user .buttons.edit:hover{
+    background-color: #B10000;
+    box-shadow: 0 2px #830002, inset 0 0 #a30000;
+}
+
+.user .buttons.edit:active {
+    box-shadow: 0 0 #830002, inset 0 1px #830002;
+    transform: translateY(2px);
+    transition: all 0s;
+}
+
+.user .buttons {
+    display: flex;
+}
+
+.user .buttons input {
+    flex: 1;
+    width: 100%;
+}
+
+.user input[type="submit"] {
+    cursor: pointer;
+    color: #FFF;
+    font-size: 1.2em;
+    border: 0 none;
+    border-radius: 4px;
+    outline: none;
+    background-color: #E30000;
+    box-shadow: 0 2px #a30000, inset 0 0 #a30000;
+}
+
+.user input[type="submit"]:hover{
+    background-color: #B10000;
+    box-shadow: 0 2px #830002, inset 0 0 #a30000;
+}
+
+.user input[type="submit"]:active {
+    box-shadow: 0 0 #830002, inset 0 1px #830002;
+    transform: translateY(2px);
+    transition: all 0s;
+}
+
+.user div.buttons a {
+    cursor: pointer;
+    border: 0 none;
+    border-radius: 4px;
+    outline: none;
+
+    height: 30px;
+    float: right;
+    margin: 10px 0 10px 0;
+    /*font-size: 22px;*/
+    font-size: 1.2em;
+    padding: 5px 5px 3px 5px;
+    text-align: center;
+    display: block;
+    background: #E30000;
+    text-decoration: none;
+    color: #fff4f3;
+    box-shadow: 0 2px #a30000, inset 0 0 #a30000;
+    line-height: 28px;
+}
+
+.user div.buttons a:hover{
+    background: #B10000;
+    box-shadow: 0 2px #830002, inset 0 0 #a30000;
+}
+
+.user div.buttons a:active{
+    box-shadow: 0 0 #830002, inset 0 1px #830002;
+    transform: translateY(2px);
+    transition: all 0s;
+}
+
+#loguot{
+    width: 83%;
+}
+
+#edit{
+    width: 17%;
+    margin-right: 10px;
+}
+
+
+
