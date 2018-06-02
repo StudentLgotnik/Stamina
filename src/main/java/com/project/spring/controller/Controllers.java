@@ -51,11 +51,11 @@ public class Controllers {
 
     @RequestMapping(value = "/Stamina", method = RequestMethod.GET)
     public String startPage(Model model){
-//        User current = this.userService.getCurrent();
-//        if (current != null) {
-//            model.addAttribute("user", current);
-            model.addAttribute("user", new User());
-//        }
+        User current = this.userService.getCurrent();
+        if (current != null) {
+            model.addAttribute("user", current);
+//            model.addAttribute("user", new User());
+        }
         return "jsp/Stamina";
     }
 
@@ -63,6 +63,7 @@ public class Controllers {
     public String type(Model model, @PathVariable("lang") String lang){
         model.addAttribute("type", new Type(lang));
         model.addAttribute("text", typeService.getLangText(lang));
+        model.addAttribute("lang", lang);
         User current = this.userService.getCurrent();
         if (current != null){
             model.addAttribute("user", current);
@@ -86,9 +87,6 @@ public class Controllers {
         User newCurrent = this.userService.getByNameAndPass(user.getName(), user.getPassword());
         newCurrent.setCurrent(true);
         this.userService.updateUser(newCurrent);
-        if (user.getName().equals("") || user.getPassword().equals("")) {
-            return "redirect:/signIn";
-        }
 
         return "redirect:/Stamina";
     }
@@ -126,6 +124,22 @@ public class Controllers {
             this.userService.updateUser(current);
         }
         return "redirect:/signUp";
+    }
+
+    @RequestMapping(value = "/type", method = RequestMethod.POST)
+    public String type(@ModelAttribute("type") Type type){
+        User current = this.userService.getCurrent();
+        if (current != null){
+            type.setUserId(current.getId());
+            if (current.getRecord() < type.getScore()){
+                current.setRecord((int) type.getScore());
+                this.userService.updateUser(current);
+            }
+        } else
+            type.setUserId(0);
+        type.setDate();
+        this.typeService.addType(type);
+        return "redirect:/type/" + type.getLanguage();
     }
 
     @RequestMapping(value = "/stype", method = RequestMethod.POST)

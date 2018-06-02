@@ -3,6 +3,7 @@ package com.project.spring.model;
 import com.project.spring.dao.TypeDaoImpl;
 
 import javax.persistence.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -49,8 +50,8 @@ public class Type {
         this.language = language;
     }
 
-    public void setData(Date date) {
-        this.date = date;
+    public void setDate() {
+        this.date = new Date();
     }
 
     public void setUserId(int userId) {

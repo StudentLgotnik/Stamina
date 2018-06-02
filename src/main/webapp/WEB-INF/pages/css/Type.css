@@ -1,5 +1,18 @@
+html,
 body {
     font-family: "helvetica", serif;
     font-size: 100%;
     background: #FFB675;
+}
+
+.typepanel {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ff2121;
+    border-radius: 4px;
 }
