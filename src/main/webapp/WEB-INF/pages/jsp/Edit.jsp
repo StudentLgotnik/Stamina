@@ -21,7 +21,7 @@
         <div>Editing</div>
         <div></div>
     </div>
-    <c:url var="edit" value="/signIn/signUp/edit"/>
+    <c:url var="edit" value="/user/edit"/>
     <form:form action="${edit}" commandName="user">
         <div class="txt">
             <p>EMail:</p>
@@ -34,7 +34,7 @@
         <%--<button type="submit" class="btn">Edit</button>--%>
         <input type="submit" value="Edit" />
     </form:form>
-    <c:url var="editPass" value="/signIn/signUp/editPass"/>
+    <c:url var="editPass" value="/user/editPass"/>
     <form:form action="${editPass}">
         <div class="hr">
             <div></div>

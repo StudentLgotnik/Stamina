@@ -2,6 +2,7 @@ package com.project.spring.controller;
 
 import com.project.spring.model.Type;
 import com.project.spring.model.User;
+import com.project.spring.service.LangService;
 import com.project.spring.service.TypeService;
 import com.project.spring.service.TypeServiceImpl;
 import com.project.spring.service.UserService;
@@ -18,6 +19,7 @@ public class Controllers {
 
     private UserService userService;
     private TypeService typeService;
+    private LangService langService;
 
     @Autowired(required = true)
     @Qualifier(value = "userService")
@@ -31,14 +33,28 @@ public class Controllers {
         this.typeService = typeService;
     }
 
-    @RequestMapping(value = "/signIn", method = RequestMethod.GET)
+    @Autowired(required = true)
+    @Qualifier(value = "langService")
+    public void setLangService(LangService langService) {
+        this.langService = langService;
+    }
+
+    @RequestMapping(value = "/Stamina", method = RequestMethod.GET)
+    public String startPage(Model model){
+        User current = this.userService.getCurrent();
+        if (current != null) {
+            model.addAttribute("user", current);
+        }
+        return "jsp/Stamina";
+    }
+
+    @RequestMapping(value = "/Stamina/signIn", method = RequestMethod.GET)
     public String currentUser(Model model){
         model.addAttribute("user", new User());
-        //model.addAttribute("listUsers", this.userService.listUsers());
         return "jsp/SignIn";
     }
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
+    @RequestMapping(value = "/Stamina/signUp", method = RequestMethod.GET)
     public String signUp(Model model){
         User current = this.userService.getCurrent();
         if (current != null){
@@ -49,20 +65,11 @@ public class Controllers {
         return "jsp/SignUp";
     }
 
-    @RequestMapping(value = "/Stamina", method = RequestMethod.GET)
-    public String startPage(Model model){
-        User current = this.userService.getCurrent();
-        if (current != null) {
-            model.addAttribute("user", current);
-//            model.addAttribute("user", new User());
-        }
-        return "jsp/Stamina";
-    }
 
-    @RequestMapping(value = "/type/{lang}", method = RequestMethod.GET)
+    @RequestMapping(value = "/Stamina/type/{lang}", method = RequestMethod.GET)
     public String type(Model model, @PathVariable("lang") String lang){
         model.addAttribute("type", new Type(lang));
-        model.addAttribute("text", typeService.getLangText(lang));
+        model.addAttribute("text", langService.getLangText(lang));
         model.addAttribute("lang", lang);
         User current = this.userService.getCurrent();
         if (current != null){
@@ -73,11 +80,17 @@ public class Controllers {
         return "jsp/Type";
     }
 
+    @RequestMapping(value = "/Stamina/edit/{name}", method = RequestMethod.GET)
+    public String editUser(Model model){
+        model.addAttribute("user", this.userService.getCurrent());
+        return "jsp/Edit";
+    }
 
-    @RequestMapping(value = "/signIn", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/doSignIn", method = RequestMethod.POST)
     public String signIn(@ModelAttribute("user") User user){
         if (user.getName().equals("") || user.getPassword().equals("")) {
-            return "redirect:/signIn";
+            return "redirect:/Stamina/signIn";
         }
         User outdated = this.userService.getCurrent();
         if (outdated != null){
@@ -91,7 +104,7 @@ public class Controllers {
         return "redirect:/Stamina";
     }
 
-    @RequestMapping(value = "/signIn/signUp", method = RequestMethod.POST)
+    @RequestMapping(value = "/doSignUp", method = RequestMethod.POST)
     public String signUp(@ModelAttribute("user") User user){
         if (user.getId() == 0){
             for (User u : this.userService.listUsers()){
@@ -107,26 +120,7 @@ public class Controllers {
         return "redirect:/Stamina";
     }
 
-    @RequestMapping(value = "/signIn/signUp/edit", method = RequestMethod.POST)
-    public String edit(@ModelAttribute("user") User user){
-        User current = this.userService.getCurrent();
-        current.setName(user.getName());
-        current.setEmail(user.getEmail());
-        this.userService.updateUser(current);
-        return "redirect:/signUp";
-    }
-
-    @RequestMapping(value = "/signIn/signUp/editPass", method = RequestMethod.POST)
-    public String editPass(@RequestParam(value="password") String pass, @RequestParam(value="newPass") String newPass){
-        User current = this.userService.getCurrent();
-        if (current.getPassword().equals(pass)){
-            current.setPassword(newPass);
-            this.userService.updateUser(current);
-        }
-        return "redirect:/signUp";
-    }
-
-    @RequestMapping(value = "/type", method = RequestMethod.POST)
+    @RequestMapping(value = "/doType", method = RequestMethod.POST)
     public String type(@ModelAttribute("type") Type type){
         User current = this.userService.getCurrent();
         if (current != null){
@@ -139,15 +133,29 @@ public class Controllers {
             type.setUserId(0);
         type.setDate();
         this.typeService.addType(type);
-        return "redirect:/type/" + type.getLanguage();
+        return "redirect:/Stamina/type/" + type.getLanguage();
     }
 
-    @RequestMapping(value = "/stype", method = RequestMethod.POST)
-    public String setType(@RequestParam(value="language") String lang){
-        return "redirect:/type/" + lang;
+    @RequestMapping(value = "/user/edit", method = RequestMethod.POST)
+    public String edit(@ModelAttribute("user") User user){
+        User current = this.userService.getCurrent();
+        current.setName(user.getName());
+        current.setEmail(user.getEmail());
+        this.userService.updateUser(current);
+        return "redirect:/Stamina/signUp";
     }
 
-    @RequestMapping("/logout/{id}")
+    @RequestMapping(value = "/user/editPass", method = RequestMethod.POST)
+    public String editPass(@RequestParam(value="password") String pass, @RequestParam(value="newPass") String newPass){
+        User current = this.userService.getCurrent();
+        if (current.getPassword().equals(pass)){
+            current.setPassword(newPass);
+            this.userService.updateUser(current);
+        }
+        return "redirect:/Stamina/signUp";
+    }
+
+    @RequestMapping("/user/logout/{id}")
     public String logOut(@PathVariable("id") int id){
         User user = this.userService.getCurrent();
         user.setCurrent(false);
@@ -155,9 +163,13 @@ public class Controllers {
         return "redirect:/Stamina";
     }
 
-    @RequestMapping(value = "edit/{name}", method = RequestMethod.GET)
-    public String editUser(Model model){
-        model.addAttribute("user", this.userService.getCurrent());
-        return "jsp/Edit";
+
+    @RequestMapping(value = "/langType", method = RequestMethod.POST)
+    public String setType(@RequestParam(value="language") String lang){
+        return "redirect:/Stamina/type/" + lang;
     }
+
+
+
+
 }

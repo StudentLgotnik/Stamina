@@ -18,8 +18,8 @@
 <div class="user">
     <!--<div class="image"><img src="../../Resourses/login.png"></div>-->
 
-    <c:url var="signUp" value="/signIn/signUp"/>
-    <form:form action="${signUp}" commandName="user">
+    <c:url var="doSignUp" value="/doSignUp"/>
+    <form:form action="${doSignUp}" commandName="user">
         <c:if test="${!user.current}">
             <div class="hr">
                 <div></div>
@@ -64,8 +64,8 @@
                 <p class="value">${user.record}</p>
             </div>
             <div class="buttons">
-                <a id="edit" href="<c:url value='/edit/${user.id}'/>" class="edit">Edit</a>
-                <a id="loguot" href="<c:url value='/logout/${user.id}'/>" class="logout">Log out</a>
+                <a id="edit" href="<c:url value='/Stamina/edit/${user.id}'/>" class="edit">Edit</a>
+                <a id="loguot" href="<c:url value='/user/logout/${user.id}'/>" class="logout">Log out</a>
             </div>
         </c:if>
     </form:form>

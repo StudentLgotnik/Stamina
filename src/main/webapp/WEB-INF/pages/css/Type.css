@@ -7,12 +7,66 @@ body {
 
 .typepanel {
     width: 100%;
-    max-width: 500px;
-    padding: 20px;
+    max-width: 700px;
     margin: 0 auto;
     position: relative;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
-    background-color: #ff2121;
-    border-radius: 4px;
+    /*background-color: #ff2121;*/
+    /*border-radius: 4px;*/
+}
+
+.vline {
+    position: absolute;
+    width: 0;
+    height: 51px;
+    display: block;
+    border: 0.5px solid black;
+    margin-left: 50%;
+}
+
+#startBtn {
+    width: 250px;
+    margin: 0 225px 0 225px;
+    font-size: 27px;
+    position: center;
+    color: #565656;
+}
+
+#typed {
+    position: absolute;
+    font-size: 40px;
+    width: 50%;
+    float: left;
+    text-align: right;
+    color: rgba(0, 0, 0, 0.5);
+
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-right-style: none;
+
+    border-color: #ff2121 transparent #ff2121 #ff2121 ;
+}
+
+#expected {
+
+    position: absolute;
+    font-size: 40px;
+    width: 50%;
+    margin-left: 350px;
+
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-left-style: none;
+
+    border-color: #ff2121 #ff2121 #ff2121 transparent;
+}
+
+#typeText {
+    width: 100%;
+    height: 51px;
+}
+
+#result {
+    margin: 0;
 }
