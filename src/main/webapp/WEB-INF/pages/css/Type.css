@@ -26,10 +26,10 @@ body {
 }
 
 #startBtn {
-    width: 250px;
-    margin: 0 225px 0 225px;
+    width: 700px;
+    display: block;
+    text-align: center;
     font-size: 27px;
-    position: center;
     color: #565656;
 }
 
@@ -68,5 +68,12 @@ body {
 }
 
 #result {
-    margin: 0;
+    /*margin-top: 5px;*/
+    text-align: center;
+    display: block;
+    width: 700px;
+    color: #565656;
+    font-size: 27px;
+    font-weight: bold;
 }
+

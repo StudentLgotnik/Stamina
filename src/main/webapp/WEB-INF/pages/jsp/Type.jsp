@@ -16,16 +16,16 @@
 <body>
 <%@include file="Header.jsp"%>
 <div class="typepanel">
-    <h1 id="startBtn">Click space to start</h1>
+    <span id="startBtn">Click space to start</span>
     <div id="typeText">
         <input type="text" id="typed" name="test" value="" readonly>
         <input type="text" id="expected" name="test" value="${text}" readonly>
         <div class="vline" id="vline"></div>
     </div>
-    <h1 id="result"></h1>
+    <span id="result">${result}</span>
     <%--<h1 id="result"></h1>--%>
 </div>
-<c:url var="type" value="/doType"/>
+<c:url var="type" value="/Stamina/type/${lang}"/>
 <form:form name="typeform" action="${type}" commandName="type">
     <form:input id="score" type="hidden" path="score" value=""/>
     <form:input id="lang" type="hidden" path="language" value="${lang}"/>
@@ -39,13 +39,7 @@
         started = false;
         document.getElementById('score').value = charPrint;
         document.typeform.submit();
-        alert('Result: ' + charPrint);
-        let expected = document.getElementById('expected');
-        let result = document.getElementById('result');
-        expected.value = '${text}';
-        // result.innerHTML = "Result: " + charPrint + " characters per minute";
         charPrint = 0;
-        submit();
     }
 
 
@@ -66,13 +60,12 @@
             else alert('Wrong! ' + charPrint)
         }
         let startBtn = document.getElementById('startBtn');
-        // let vline = document.getElementById('vline');
         let typeText = document.getElementById('typeText');
         let result = document.getElementById('result');
         if (x === 32 && !started){
-            // result.innerHTML = '';
+            result.innerHTML = '';
             startBtn.innerHTML = '';
-            typeText.style.marginTop = "16px";
+            // typeText.style.marginTop = "12px";
             started = true;
             setTimeout(end, 60000);
         }

@@ -28,7 +28,7 @@ body {
     padding: 20px;
     margin: 0 auto;
     position: relative;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     background-color: #ff2121;
     border-radius: 4px;
@@ -106,6 +106,12 @@ form{
     padding: 0 15px;
     line-height: 70px;
     text-align: center;
+}
+.errorMess {
+    text-align: center;
+    display: block;
+    width: 500px;
+    color: #fff4f3;
 }
 .loginpanel input[type="submit"] {
     cursor: pointer;

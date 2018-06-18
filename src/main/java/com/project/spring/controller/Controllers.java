@@ -49,7 +49,7 @@ public class Controllers {
     }
 
     @RequestMapping(value = "/Stamina/signIn", method = RequestMethod.GET)
-    public String currentUser(Model model){
+    public String signIn(Model model){
         model.addAttribute("user", new User());
         return "jsp/SignIn";
     }
@@ -61,7 +61,6 @@ public class Controllers {
             model.addAttribute("user", current);
         }
         else model.addAttribute("user", new User());
-        //model.addAttribute("listUsers", this.userService.listUsers());
         return "jsp/SignUp";
     }
 
@@ -88,7 +87,7 @@ public class Controllers {
 
 
     @RequestMapping(value = "/doSignIn", method = RequestMethod.POST)
-    public String signIn(@ModelAttribute("user") User user){
+    public String signIn(@ModelAttribute("user") User user, Model model){
         if (user.getName().equals("") || user.getPassword().equals("")) {
             return "redirect:/Stamina/signIn";
         }
@@ -98,6 +97,10 @@ public class Controllers {
             this.userService.updateUser(outdated);
         }
         User newCurrent = this.userService.getByNameAndPass(user.getName(), user.getPassword());
+        if (newCurrent == null){
+            model.addAttribute("errorMess", "Login or password is incorrect!");
+            return signIn(model);
+        }
         newCurrent.setCurrent(true);
         this.userService.updateUser(newCurrent);
 
@@ -105,7 +108,17 @@ public class Controllers {
     }
 
     @RequestMapping(value = "/doSignUp", method = RequestMethod.POST)
-    public String signUp(@ModelAttribute("user") User user){
+    public String signUp(@ModelAttribute("user") User user, Model model){
+        for (User u : userService.listUsers()){
+            if (u.getEmail().equals(user.getEmail())){
+                model.addAttribute("errorEmail", "Email exist already!");
+                return signUp(model);
+            }
+            if (u.getName().equals(user.getName())){
+                model.addAttribute("errorName", "Name exists already!");
+                return signUp(model);
+            }
+        }
         if (user.getId() == 0){
             for (User u : this.userService.listUsers()){
                 if (u != user) {
@@ -120,8 +133,8 @@ public class Controllers {
         return "redirect:/Stamina";
     }
 
-    @RequestMapping(value = "/doType", method = RequestMethod.POST)
-    public String type(@ModelAttribute("type") Type type){
+    @RequestMapping(value = "/Stamina/type/{lang}", method = RequestMethod.POST)
+    public String dotype(@ModelAttribute("type") Type type, Model model){
         User current = this.userService.getCurrent();
         if (current != null){
             type.setUserId(current.getId());
@@ -133,14 +146,47 @@ public class Controllers {
             type.setUserId(0);
         type.setDate();
         this.typeService.addType(type);
-        return "redirect:/Stamina/type/" + type.getLanguage();
+        model.addAttribute("result", "Result: " + (int)type.getScore() + " character per minute");
+        return type(model, type.getLanguage());
+//        return "redirect:/Stamina/type/" + type.getLanguage();
     }
 
-    @RequestMapping(value = "/user/edit", method = RequestMethod.POST)
-    public String edit(@ModelAttribute("user") User user){
+    @RequestMapping(value = "/user/editEmail", method = RequestMethod.POST)
+    public String editEmail(@ModelAttribute("user") User user, Model model) {
         User current = this.userService.getCurrent();
-        current.setName(user.getName());
-        current.setEmail(user.getEmail());
+        if (current != null) {
+            if (user.getEmail().equals(current.getEmail())){
+                model.addAttribute("errorEmail", "You have already using this Email!");
+                return editUser(model);
+            }
+            for (User u : userService.listUsers()) {
+                if (user.getEmail().equals(u.getEmail())) {
+                    model.addAttribute("errorEmail", "Email is already occupied!");
+                    return editUser(model);
+                }
+            }
+            current.setEmail(user.getEmail());
+        }
+        this.userService.updateUser(current);
+        return "redirect:/Stamina/signUp";
+    }
+
+    @RequestMapping(value = "/user/editName", method = RequestMethod.POST)
+    public String editName(@ModelAttribute("user") User user, Model model){
+        User current = this.userService.getCurrent();
+        if (current != null) {
+            if (user.getName().equals(current.getName())){
+                model.addAttribute("errorName", "You have already using this Name!");
+                return editUser(model);
+            }
+            for (User u : userService.listUsers()) {
+                if (user.getName().equals(u.getName())) {
+                    model.addAttribute("errorName", "Name is already occupied!");
+                    return editUser(model);
+                }
+            }
+            current.setName(user.getName());
+        }
         this.userService.updateUser(current);
         return "redirect:/Stamina/signUp";
     }
@@ -155,7 +201,7 @@ public class Controllers {
         return "redirect:/Stamina/signUp";
     }
 
-    @RequestMapping("/user/logout/{id}")
+    @RequestMapping(value = "/user/logout/{id}")
     public String logOut(@PathVariable("id") int id){
         User user = this.userService.getCurrent();
         user.setCurrent(false);
@@ -163,13 +209,8 @@ public class Controllers {
         return "redirect:/Stamina";
     }
 
-
     @RequestMapping(value = "/langType", method = RequestMethod.POST)
     public String setType(@RequestParam(value="language") String lang){
         return "redirect:/Stamina/type/" + lang;
     }
-
-
-
-
 }

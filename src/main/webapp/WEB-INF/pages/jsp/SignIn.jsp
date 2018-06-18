@@ -21,6 +21,7 @@
             <form:input id="pwd" path="password" type="password" placeholder="Password" required="true"/>
             <label for="pwd" class="entypo-lock"></label>
         </div>
+        <span class="errorMess">${errorMess}</span>
         <div class="buttons">
             <input type="submit" value="Login" />
             <span>

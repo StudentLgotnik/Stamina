@@ -30,10 +30,12 @@
                 <p>Email:</p>
                 <form:input path="email" placeholder="Enter Email*" required="true"/>
             </div>
+            <span class="errorMess">${errorEmail}</span>
             <div class="txt">
                 <p>Username:</p>
                 <form:input path="name" placeholder="Enter Username*" required="true"/>
             </div>
+            <span class="errorMess">${errorName}</span>
             <div class="txt">
                 <p id="password">Password:</p>
                 <form:input type="password" path="password" placeholder="Enter Password*" required="true"/>

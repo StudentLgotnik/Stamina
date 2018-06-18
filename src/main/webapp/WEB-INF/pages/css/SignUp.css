@@ -11,7 +11,7 @@ body {
     padding: 10px 20px 20px 20px;
     margin: 0 auto;
     position: relative;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     background-color: #ff2121;
     border-radius: 4px;
@@ -218,6 +218,13 @@ body {
 
 #loguot{
     width: 83%;
+}
+
+.errorMess {
+    text-align: center;
+    display: block;
+    width: 500px;
+    color: #fff4f3;
 }
 
 #edit{
