@@ -1,21 +1,21 @@
-<h2>**Description:**</h2>
+**Description:**
 <br>This maven project is analogous to the program 'Stamina' only in the form of a website.
 In project used jsp files with css styles in folder 'webapp/WEB-INF/pages'. 
 The project isn't ideal and needs further work. 
 Especially the storage functionality of the current user and isn't intended for multi-user use. The 
 reason for all this is the lack of my experience. 
-pom.xml have all required comments. 
-<h2>**Technologies:**</h2>
+pom.xml have all required comments. <br>
+**Technologies:**
 1. Spring MVC;
 2. Hibernate;
 3. SLF4J
 4. DBCP
 5. Servlet
 ---
-<h2>**Server:**</h2>
+**Server:**
 <br>Tomcat 7.0.85
 <br>Default URL: http://localhost:8080/
-<h2>**Database:**</h2>
+<br>**Database:**
 Used: MySQL;
 <br>Script to create tables:
 ```sql
