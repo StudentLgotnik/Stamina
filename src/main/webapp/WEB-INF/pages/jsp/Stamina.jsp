@@ -14,8 +14,8 @@
     <%--<img src="WEB-INF/pages/css/resources/typingYelloww.png" />--%>
     <%@include file="Header.jsp"%>
     <div class="content">
-        <c:url var="stype" value="/stype"/>
-        <form:form action="${stype}" commandName="user">
+        <c:url var="langType" value="/langType"/>
+        <form:form action="${langType}" commandName="user">
             <input type="submit" class="start" value="Start">
             <%--<a class="start" href="/type">Start</a>--%>
             <h1 class="lantext">Language:</h1>

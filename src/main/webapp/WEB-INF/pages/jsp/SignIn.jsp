@@ -11,8 +11,8 @@
 <body>
 <jsp:include page="Header.jsp"/>
 <div class="loginpanel">
-    <c:url var="signIn" value="/signIn"/>
-    <form:form action="${signIn}" commandName="user">
+    <c:url var="doSignIn" value="/doSignIn"/>
+    <form:form action="${doSignIn}" commandName="user">
         <div class="txt">
             <form:input id="user" path="name" type="text" placeholder="Username" required="true"/>
             <label for="user" class="entypo-user"></label>
@@ -21,10 +21,11 @@
             <form:input id="pwd" path="password" type="password" placeholder="Password" required="true"/>
             <label for="pwd" class="entypo-lock"></label>
         </div>
+        <span class="errorMess">${errorMess}</span>
         <div class="buttons">
             <input type="submit" value="Login" />
             <span>
-                <a href="<c:url value="/signUp"/>" class="register">Signup</a>
+                <a href="<c:url value="/Stamina/signUp"/>" class="register">Signup</a>
             </span>
         </div>
     </form:form>

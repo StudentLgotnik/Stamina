@@ -21,20 +21,25 @@
         <div>Editing</div>
         <div></div>
     </div>
-    <c:url var="edit" value="/signIn/signUp/edit"/>
-    <form:form action="${edit}" commandName="user">
+    <c:url var="editEmail" value="/user/editEmail"/>
+    <form:form action="${editEmail}" commandName="user">
         <div class="txt">
             <p>EMail:</p>
             <form:input path="email" size="16" required="true"/>
         </div>
+        <span class="errorMess">${errorEmail}</span>
+        <input type="submit" value="Edit Email" />
+    </form:form>
+    <c:url var="editName" value="/user/editName"/>
+    <form:form action="${editName}" commandName="user">
         <div class="txt">
             <p>Username:</p>
             <form:input path="name" size="16" required="true"/>
         </div>
-        <%--<button type="submit" class="btn">Edit</button>--%>
-        <input type="submit" value="Edit" />
+        <span class="errorMess">${errorName}</span>
+        <input type="submit" value="Edit Name" />
     </form:form>
-    <c:url var="editPass" value="/signIn/signUp/editPass"/>
+    <c:url var="editPass" value="/user/editPass"/>
     <form:form action="${editPass}">
         <div class="hr">
             <div></div>
@@ -45,7 +50,6 @@
             <input type="password" id="password" size="16" name="password" placeholder="Enter password" required=""/>
             <input type="password" id="newPass" size="16" name="newPass" placeholder="Enter new password" required=""/>
         </div>
-        <%--<button type="submit" class="btn">Update password</button>--%>
         <input type="submit" value="Update password" />
     </form:form>
 </div>

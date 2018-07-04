@@ -47,9 +47,4 @@ public class TypeServiceImpl implements TypeService {
         return this.typeDao.listUserTypes(userId);
     }
 
-    @Override
-    @Transactional
-    public String getLangText(String language) {
-        return this.typeDao.getLangText(language);
-    }
 }

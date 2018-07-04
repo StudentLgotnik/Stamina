@@ -20,14 +20,14 @@
         <a id="home" href="<c:url value="/Stamina"/>">Stamina</a>
     </h2>
     <c:if test="${!user.current}">
-        <a class="signIn" href="<c:url value="/signIn"/>">Sign in</a>
+        <a class="signIn" href="<c:url value="/Stamina/signIn"/>">Sign in</a>
     </c:if>
     <c:if test="${user.current}">
         <c:if test="${user.name.length() > 5}">
-            <a class="signUp" href="<c:url value="/signUp"/>">${user.name.substring(0, 5)}.</a>
+            <a class="signUp" href="<c:url value="/Stamina/signUp"/>">${user.name.substring(0, 5)}.</a>
         </c:if>
         <c:if test="${user.name.length() <= 5}">
-            <a class="signUp" href="<c:url value="/signUp"/>">${user.name}</a>
+            <a class="signUp" href="<c:url value="/Stamina/signUp"/>">${user.name}</a>
         </c:if>
     </c:if>
 </div>

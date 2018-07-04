@@ -16,6 +16,4 @@ public interface TypeService {
 
     public List<Type> listUserTypes(int userId);
 
-    public String getLangText(String language);
-
 }

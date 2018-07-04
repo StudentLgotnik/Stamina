@@ -2,6 +2,7 @@ package com.project.spring.dao;
 
 import com.project.spring.model.Type;
 import com.project.spring.model.User;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -65,12 +66,4 @@ public class TypeDaoImpl implements TypeDao{
         return typeList;
     }
 
-    @Override
-    public String getLangText(String language) {
-        Session session = this.sessionFactory.getCurrentSession();
-//        String text = session.createQuery("from Languages l where l.language like English").toString();
-//        String text = session.createSQLQuery("SELECT * FROM LANGUAGES WHERE ID = 1").toString();
-        String text = "             user user user user user user user user user user user user user user user ";
-        return text;
-    }
 }

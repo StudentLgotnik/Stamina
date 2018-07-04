@@ -17,6 +17,4 @@ public interface TypeDao {
 
     public List<Type> listUserTypes(int userId);
 
-    public String getLangText(String language);
-
 }
